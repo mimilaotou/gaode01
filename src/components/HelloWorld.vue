@@ -1,16 +1,16 @@
 <template>
   <div class="hello">
     <div class="hell_top">
-      <img src="../assets/t2.png" style="width: 22px;height: 20px;" @click="add">
+      <img src="../assets/t2.png" style="width: 22px;height: 20px;position: relative;left: -15px;" @click="add">
       <span style="font-size: 17px;font-weight: 900;">我的足迹记录</span>
-      <img src="../assets/t1.png" style="width: 23px;height: 32px;" @click="del">
+      <img src="../assets/t1.png" style="width: 23px;height: 32px;position: relative;left: 10px;" @click="del">
     </div>
     <div class="top_t">
       <img src="../assets/t3.png" style="width: 60%;;height: 100%;">
     </div>
     <div class="top_three" @click="showNum = true">
       <div>
-        <span>累计导航 <span class="three_text">{{ Num01 }}</span> 公里 <span class="three_text">{{ Num02 }}</span> 轨迹</span> <img src="../assets/t4.png" style="width: 55px;;height: 28px;position: relative;top: 5px;">
+        <span>累计导航 <span class="three_text">{{ Num01 }}</span> 公里 <span class="three_text">{{ Num02 }}</span> 轨迹</span> <img src="../assets/t4.png" style="width: 50px;;height: 25px;position: relative;top: 5px;">
       </div>
     </div>
     <div class="riqi" align="left" @click="showrq = true">
@@ -210,9 +210,9 @@ import { ref } from 'vue'
     font-weight: 400;
   }
   .three_text{
-    font-size: 28px !important;
+    font-size: 26px !important;
     color: #64f4ff;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
   }
   .riqi{
     color: #fafefd;

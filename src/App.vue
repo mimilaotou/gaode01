@@ -16,7 +16,7 @@ export default {
 *{margin:0; padding:0;}
 @font-face {
   font-family: 'MyCustomFont';
-  src: url('./assets/font/微软雅黑-win10 粗体.ttf') format('truetype');
+  src: url('./assets/font/微软雅黑-win10 粗体.woff') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
