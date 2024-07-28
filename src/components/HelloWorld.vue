@@ -338,8 +338,8 @@ import { ref } from 'vue'
     text-align: left;
     position: relative;
     padding-left: 10px;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 13px;
+    font-weight: 400;
     letter-spacing: 0.5px;
     /* display: flex;
     align-content: space-between;
