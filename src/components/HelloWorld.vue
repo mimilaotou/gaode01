@@ -2,7 +2,7 @@
   <div class="hello">
     <div class="hell_top">
       <img src="../assets/t2.png" style="width: 22px;height: 20px;position: relative;left: -15px;" @click="add">
-      <span style="font-size: 17px;font-weight: 900;">我的足迹记录</span>
+      <span style="font-size: 17px;font-weight: 900;" @click="requestFullScreen">我的足迹记录</span>
       <img src="../assets/t1.png" style="width: 23px;height: 32px;position: relative;left: 10px;" @click="del">
     </div>
     <div class="top_t">
@@ -19,20 +19,20 @@
     <div class="hezi">
       <div class="da_hezi" v-for="(item,index) in Data" :key="index" @click="handlerIndex(item,index)">
           <div style="width: 100%;" class="hezi_top">
-            <img v-if="item.walk" src="../assets/t5.png" style="width: 55px;height: 22px;margin-right: 5px;">
-            <img v-else src="../assets/t6.png" style="width: 55px;height: 22px;margin-right: 5px;">
+            <img v-if="item.walk" src="../assets/t5.png" style="width: 48px;height: 19px;margin-right: 5px;">
+            <img v-else src="../assets/t6.png" style="width: 48px;height: 19px;margin-right: 5px;">
             <span>{{ item.date }} {{ item.time }}</span>
             <el-divider direction="vertical" />
             <img src="../assets/t7.png" style="width: 18px;height: 18px;margin-right: 5px;">
              <span> {{ item.km>=1000 ?(item.km*0.001).toFixed(1) : item.km}}{{ item.km>=1000 ? '公里' : '米' }}</span>
-            <img v-if="!item.walk" src="../assets/t10.png" style="width: 45px;height: 20px;position: absolute;right: 10px;">
+            <img v-if="item.cbp" src="../assets/t10.png" style="width: 40px;height: 19px;position: absolute;right: 10px;">
 
           </div>
           <el-divider  />
           <div class="hezi_bottom">
-            <img src="../assets/t8.png" style="width: 18px;height: 51px;margin: 5px 0px;">
+            <img src="../assets/t8.png" style="width: 18px;height: 51px;">
             <div class="bottom_zyf">
-              <div >{{ item.lutu1 }}</div>
+              <div class="zyf_dw1">{{ item.lutu1 }}</div>
               <div class="zyf_dw">{{ item.lutu2 }}</div>
             </div>
             <img src="../assets/t9.png" style="width: 18px;height: 51px;">
@@ -46,6 +46,14 @@
           <van-radio-group v-model="from.walk" direction="horizontal">
             <van-radio :name="true">步行</van-radio>
             <van-radio :name="false">驾车</van-radio>
+          </van-radio-group>
+        </template>
+      </van-field>
+      <van-field name="radio" label="错必赔">
+        <template #input>
+          <van-radio-group v-model="from.cbp" direction="horizontal">
+            <van-radio :name="true">显示</van-radio>
+            <van-radio :name="false">不显示</van-radio>
           </van-radio-group>
         </template>
       </van-field>
@@ -126,12 +134,34 @@ import { ref } from 'vue'
   const Num02 = ref(370)
   const from =ref({
     walk:false,
+    cbp:false,
     time:'',
     date:'',
     km:0,
     lutu1:'',
     lutu2:''
   })
+
+  function requestFullScreen() {
+
+    var de = document.documentElement;
+
+      if (de.requestFullscreen) {
+
+      de.requestFullscreen();
+
+      } else if (de.mozRequestFullScreen) {
+
+      de.mozRequestFullScreen();
+
+      } else if (de.webkitRequestFullScreen) {
+
+      de.webkitRequestFullScreen();
+
+      }
+
+    }
+
   function onriqi ({ selectedValues }){
     riteme.value = selectedValues.join('年')+'月';
     showrq.value = false;
@@ -163,6 +193,7 @@ import { ref } from 'vue'
   function add(){
     Data.value.push({
       walk:true,   //true:步行，false驾车
+      cbp:false, //错必赔图标
       date:'07月25日',
       time:'19:19',
       km:4666,
@@ -200,6 +231,7 @@ import { ref } from 'vue'
   box-sizing: border-box;
   font-size: 14px;
   height: 40px;
+
 }
 .top_three>div{
     height: 100%;
@@ -207,12 +239,13 @@ import { ref } from 'vue'
     border-radius: 8px;
     padding: 10px;
     color: #fafefd;
-    font-weight: 400;
-  }
+  font-weight: 500;
+}
   .three_text{
     font-size: 26px !important;
     color: #64f4ff;
     letter-spacing: 0.5px;
+    font-weight: 600;
   }
   .riqi{
     color: #fafefd;
@@ -238,7 +271,7 @@ import { ref } from 'vue'
     font-size: 12px;
     /* letter-spacing: 1px; */
     align-items: center;
-    font-weight: 100;
+    font-weight: 400;
   }
   .el-divider--vertical{
     border-color: #394962;
@@ -259,15 +292,19 @@ import { ref } from 'vue'
     position: relative;
     padding-left: 10px;
     font-size: 14px;
-    font-weight: 100;
+    font-weight: 500;
     letter-spacing: 0.5px;
     /* display: flex;
     align-content: space-between;
     flex-wrap: wrap; */
   }
+  .zyf_dw1{
+    position: absolute;
+    top: -1px;
+  }
   .zyf_dw{
     position: absolute;
-    bottom: 5px;
+    bottom: 0px;
   }
   .da_hezi{
     position: relative;
