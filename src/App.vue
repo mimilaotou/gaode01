@@ -23,15 +23,16 @@ export default {
 #app {
   
   /* font-family: Avenir, Helvetica, Arial, sans-serif; */
-  font-family: 'Microsoft YaHei', 'Arial', sans-serif;
-  font-family: 'MyCustomFont', sans-serif;
+  /* font-family: 'Microsoft Heiti', 'Arial', sans-serif; */
+  font-family: "黑体", "Heiti SC", "Heiti TC", sans-serif;
+  /* font-family: 'MyCustomFont', sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  padding-top: 35px;
+  padding-top: 25px;
   width: 100vw;
-  min-height: 120vh;
+  min-height: 100vh;
   background-color:#0e1a26;
 }
 </style>

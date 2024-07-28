@@ -1,29 +1,34 @@
 <template>
   <div class="hello">
+    <div align="center">
+      <img src="../assets/t11.png" style="width: 55px;height: 16px;">
+    </div>
     <div class="hell_top">
       <img src="../assets/t2.png" style="width: 22px;height: 20px;position: relative;left: -15px;" @click="add">
       <span style="font-size: 17px;font-weight: 900;" @click="requestFullScreen">我的足迹记录</span>
-      <img src="../assets/t1.png" style="width: 23px;height: 32px;position: relative;left: 10px;" @click="del">
+      <img src="../assets/t1.png" style="width: 23px;height: 32px;position: relative;left: 10px;" @click="shanchu">
     </div>
     <div class="top_t">
       <img src="../assets/t3.png" style="width: 60%;;height: 100%;">
     </div>
     <div class="top_three" @click="showNum = true">
       <div>
-        <span>累计导航 <span class="three_text">{{ Num01 }}</span> 公里 <span class="three_text">{{ Num02 }}</span> 轨迹</span> <img src="../assets/t4.png" style="width: 50px;;height: 25px;position: relative;top: 5px;">
+        <span>累计导航 <span class="three_text">{{ Num01 }}</span> 公里 <span class="three_text">{{ Num02 }}</span> 轨迹</span> <img src="../assets/t4.png" style="width: 55px;;height: 28px;position: absolute;top:20px;right: 20px;">
       </div>
     </div>
-    <div class="riqi" align="left" @click="showrq = true">
-      {{ riteme }}
+    <div class="zonghezi">
+    <div v-for="(v,i) in ArrData" :key="i"> 
+    <div class="riqi" align="left" @click="riqixinzeng(i)">
+      {{ v.riteme }}
     </div>
     <div class="hezi">
-      <div class="da_hezi" v-for="(item,index) in Data" :key="index" @click="handlerIndex(item,index)">
+      <div class="da_hezi" v-for="(item,index) in v.Data" :key="index" @click="handlerIndex(item,index,i)">
           <div style="width: 100%;" class="hezi_top">
-            <img v-if="item.walk" src="../assets/t5.png" style="width: 48px;height: 19px;margin-right: 5px;">
-            <img v-else src="../assets/t6.png" style="width: 48px;height: 19px;margin-right: 5px;">
+            <img v-if="item.walk" src="../assets/t5.png" style="width: 51px;height: 20px;margin-right: 5px;">
+            <img v-else src="../assets/t6.png" style="width: 51px;height: 20px;margin-right: 5px;">
             <span>{{ item.date }} {{ item.time }}</span>
             <el-divider direction="vertical" />
-            <img src="../assets/t7.png" style="width: 18px;height: 18px;margin-right: 5px;">
+            <img src="../assets/t7.png" style="width: 16px;height: 16px;margin-right: 1px;">
              <span> {{ item.km>=1000 ?(item.km*0.001).toFixed(1) : item.km}}{{ item.km>=1000 ? '公里' : '米' }}</span>
             <img v-if="item.cbp" src="../assets/t10.png" style="width: 40px;height: 19px;position: absolute;right: 10px;">
 
@@ -40,6 +45,8 @@
           </div>
       </div>
     </div>
+  </div>
+</div>
     <van-popup v-model:show="show" round closeable position="bottom" :style="{ width: '100%' }">
       <van-field name="radio" label="步行/驾车">
         <template #input>
@@ -97,12 +104,14 @@
         label="地址2"
         placeholder="请输入地址2"
       />
+      <van-button style="width: 100%;" type="danger" @click="del()">删除</van-button>
     </van-popup>
     <!-- top日期月份 -->
     <van-popup v-model:show="showrq" position="bottom">
         <van-date-picker
           @confirm="onriqi" :columns-type="['year', 'month']" @cancel="showrq = false"
         />
+        <van-button style="width: 100%;" type="primary" @click="handleadd()">添加行程</van-button>
     </van-popup>
     <!-- top公里数轨迹 -->
     <van-popup v-model:show="showNum" position="bottom">
@@ -122,16 +131,16 @@
 
 <script setup>
 import { ref } from 'vue'
-  const Data = ref([])
   const show = ref(false)
-  const riteme = ref('2024年7月')
   const Index = ref(undefined)
+  const Index1 = ref(undefined)
   const showPicker =ref(false)
   const showPickertime =ref(false)
   const showrq =ref(false)
   const showNum = ref(false)
-  const Num01 = ref(3708)
+  const Num01 = ref(9793)
   const Num02 = ref(370)
+  const ArrData = ref([]) //外层
   const from =ref({
     walk:false,
     cbp:false,
@@ -141,29 +150,51 @@ import { ref } from 'vue'
     lutu1:'',
     lutu2:''
   })
+            function requestFullScreen() {
 
-  function requestFullScreen() {
+          var de = document.documentElement;
 
-    var de = document.documentElement;
+          if (de.requestFullscreen) {
 
-      if (de.requestFullscreen) {
+          de.requestFullscreen();
 
-      de.requestFullscreen();
+          } else if (de.mozRequestFullScreen) {
 
-      } else if (de.mozRequestFullScreen) {
+          de.mozRequestFullScreen();
 
-      de.mozRequestFullScreen();
+          } else if (de.webkitRequestFullScreen) {
 
-      } else if (de.webkitRequestFullScreen) {
+          de.webkitRequestFullScreen();
 
-      de.webkitRequestFullScreen();
+          }
 
-      }
-
+          }
+    //删除日期
+    function shanchu(){
+      if(ArrData.value.length<=1) return false
+      ArrData.value.splice(ArrData.value.length-1,1)
     }
-
+    //添加行程
+    function handleadd(){
+      ArrData.value[Index1.value].Data.push(
+        {
+          walk:true,   //true:步行，false驾车
+          cbp:false, //错必赔图标
+          date:'07月25日',
+          time:'19:19',
+          km:4666,
+          lutu1:'深圳市宝安区广深路西乡段350-2号',
+          lutu2:'广汽埃安深圳航城体验中心'
+        })
+    }
+    //新增行程
+    function riqixinzeng(index){
+      showrq.value = true
+      Index1.value = index
+  }
   function onriqi ({ selectedValues }){
-    riteme.value = selectedValues.join('年')+'月';
+    console.log(ArrData.value[Index1.value]);
+    ArrData.value[Index1.value].riteme = selectedValues.join('年')+'月';
     showrq.value = false;
   }
   const formatter = (type, option) => {
@@ -185,30 +216,42 @@ import { ref } from 'vue'
       showPicker.value = false;
     console.log(from.value.date);
   }
-  function handlerIndex(item,index){
+  function handlerIndex(item,index,index1){
     show.value = true
     from.value = item
     Index.value = index
+    Index1.value = index1
   }
   function add(){
-    Data.value.push({
-      walk:true,   //true:步行，false驾车
-      cbp:false, //错必赔图标
-      date:'07月25日',
-      time:'19:19',
-      km:4666,
-      lutu1:'深圳市宝安区广深路西乡段350-2号',
-      lutu2:'广汽埃安深圳航城体验中心'
+    ArrData.value.push({
+      riteme:'2024年07月',
+      Data:[{
+        walk:true,   //true:步行，false驾车
+        cbp:false, //错必赔图标
+        date:'07月25日',
+        time:'19:19',
+        km:4666,
+        lutu1:'深圳市宝安区广深路西乡段350-2号',
+        lutu2:'广汽埃安深圳航城体验中心'
+      }]
     })
+    
   }
   function del(){
-    if(Data.value.length<=1) return false
-    Data.value.splice(Data.value.length-1,1)
+    if(ArrData.value[Index1.value].Data.length<=1) return false
+    ArrData.value[Index1.value].Data.splice(Index.value,1)
+    show.value = false
   }
+  // requestFullScreen()
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.zonghezi{
+  width: 100%;
+  height: 75vh;
+  overflow-x: auto;
+}
 .hell_top{
   width: 100%;
   height: 50px;
@@ -216,7 +259,7 @@ import { ref } from 'vue'
   color: #fafefd;
     align-items: center;
     justify-content: space-around;
-    letter-spacing: 3px;
+    letter-spacing: 1px;
 }
 .top_t{
   width: 100%;
@@ -225,36 +268,37 @@ import { ref } from 'vue'
   justify-content: center;
 }
 .top_three{
-  padding: 0 20px;
-  margin: 20px 0px;
-  width: 100%;
+  padding: 0 10px;
+    margin: 15px 0px 40px 0px;
+    width: 100%;
   box-sizing: border-box;
   font-size: 14px;
   height: 40px;
+  position: relative;
 
 }
 .top_three>div{
     height: 100%;
+    text-align: left;
     background-color: #23334c;
     border-radius: 8px;
-    padding: 10px;
+    padding: 15px 10px;
     color: #fafefd;
-  font-weight: 500;
+  font-weight: 600;
 }
   .three_text{
-    font-size: 26px !important;
+    font-size: 28px !important;
     color: #64f4ff;
-    letter-spacing: 0.5px;
     font-weight: 600;
   }
   .riqi{
     color: #fafefd;
     font-weight: 600;
-    margin: 20px;
-    margin: 40px 0px 10px 20px;
+    font-size: 14px;
+    margin: 15px 0px 10px 10px;
   }
   .hezi{
-  padding: 0 20px;
+  padding: 0 10px;
   margin: 10px 0px;
   width: 100%;
   box-sizing: border-box;
@@ -275,6 +319,7 @@ import { ref } from 'vue'
   }
   .el-divider--vertical{
     border-color: #394962;
+    margin: 0 5px;
   }
   .el-divider--horizontal{
     margin: 10px 0;

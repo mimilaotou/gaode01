@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import App from './App.vue'
-import { Popup,Form, Field, CellGroup,RadioGroup, Radio, DatePicker,TimePicker  } from 'vant';
+import { Popup,Form, Field, CellGroup,RadioGroup, Radio, DatePicker,TimePicker, Button } from 'vant';
 import 'vant/lib/index.css';
 
 
@@ -16,5 +16,6 @@ app.use(RadioGroup);
 app.use(Radio);
 app.use(DatePicker);
 app.use(TimePicker);
+app.use(Button);
 app.use(ElementPlus)
 app.mount('#app')
