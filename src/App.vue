@@ -14,12 +14,12 @@ export default {
 
 <style>
 *{margin:0; padding:0;}
-/* @font-face {
-  font-family: 'MyCustomFont';
-  src: url('./assets/font/微软雅黑-win10 粗体.woff') format('truetype');
+@font-face {
+  font-family: 'Bahnschrift';
+  src: url('./assets/font/Bahnschrift.woff2.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-} */
+}
 #app {
   
   /* font-family: Avenir, Helvetica, Arial, sans-serif; */
@@ -32,7 +32,7 @@ export default {
   color: #2c3e50;
   padding-top: 25px;
   width: 100vw;
-  min-height: 100vh;
-  background-color:#0e1a26;
+  min-height: 120vh;
+  background-color:#0f1825;
 }
 </style>

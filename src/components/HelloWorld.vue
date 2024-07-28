@@ -4,9 +4,9 @@
       <img src="../assets/t11.png" style="width: 55px;height: 16px;">
     </div>
     <div class="hell_top">
-      <img src="../assets/t2.png" style="width: 22px;height: 20px;position: relative;left: -15px;" @click="add">
+      <img src="../assets/t2.png" style="width: 20px;height: 18px;position: relative;left: -20px;" @click="add">
       <span style="font-size: 17px;font-weight: 900;" @click="requestFullScreen">我的足迹记录</span>
-      <img src="../assets/t1.png" style="width: 23px;height: 32px;position: relative;left: 10px;" @click="shanchu">
+      <img src="../assets/t1.png" style="width: 22px;height: 30px;position: relative;left: 25px;" @click="shanchu">
     </div>
     <div class="top_t">
       <img src="../assets/t3.png" style="width: 60%;;height: 100%;">
@@ -35,12 +35,12 @@
           </div>
           <el-divider  />
           <div class="hezi_bottom">
-            <img src="../assets/t8.png" style="width: 18px;height: 51px;">
+            <img src="../assets/t8.png" style="width: 17px;height: 48px;">
             <div class="bottom_zyf">
               <div class="zyf_dw1">{{ item.lutu1 }}</div>
               <div class="zyf_dw">{{ item.lutu2 }}</div>
             </div>
-            <img src="../assets/t9.png" style="width: 18px;height: 51px;">
+            <img src="../assets/t9.png" style="width: 17px;height: 48px;">
 
           </div>
       </div>
@@ -288,8 +288,10 @@ import { ref } from 'vue'
 }
   .three_text{
     font-size: 28px !important;
+    font-family: 'Bahnschrift', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #64f4ff;
-    font-weight: 600;
+    letter-spacing: -1px;
+    font-weight: 500;
   }
   .riqi{
     color: #fafefd;
