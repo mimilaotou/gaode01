@@ -322,7 +322,7 @@ function del() {
 }
 .top_three {
   padding: 0 10px;
-  margin: 15px 0px 40px 0px;
+  margin: 15px 0px 35px 0px;
   width: 100%;
   box-sizing: border-box;
   font-size: 14px;
@@ -361,7 +361,7 @@ function del() {
   height: 100%;
   background-color: #23334c;
   border-radius: 8px;
-  padding: 10px;
+  padding: 10px 10px 17px 10px;
 }
 .hezi_top {
   display: flex;
