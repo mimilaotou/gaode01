@@ -40,7 +40,7 @@
       </div>
     </div>
     <div class="zonghezi">
-      <div v-for="(v, i) in ArrData" :key="i">
+      <div v-for="(v, i) in ArrData" :key="i" style="margin-bottom: 15px;">
         <div class="riqi" align="left" @click="riqixinzeng(i)">
           {{ v.riteme }}
         </div>
@@ -349,7 +349,7 @@ function del() {
   color: #fafefd;
   font-weight: 600;
   font-size: 14px;
-  margin: 15px 0px 10px 10px;
+  margin: 0px 0px 10px 10px;
 }
 .hezi {
   padding: 0 10px;
