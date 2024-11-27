@@ -24,7 +24,7 @@
     <div class="top_three" @click="showNum = true">
       <div>
         <span
-          >累计导航 <span class="three_text">{{ Num01>=10000? parseFloat(Num01/10000).toFixed(1) : Num01}}</span> {{Num01>=10000 ? '万':''}}公里
+          >累计导航 <span class="three_text">{{ Num01>=10000? parseFloat(Num01/10000).toFixed(1) : Num01}}</span><span v-if="Num01>=10000" style="margin-left: 8px;">万公里</span><span v-else> 公里</span>
           <span class="three_text">{{ Num02 }}</span> 轨迹</span
         >
         <img
