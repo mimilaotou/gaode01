@@ -24,7 +24,7 @@
     <div class="top_three" @click="showNum = true">
       <div>
         <span
-          >累计导航 <span class="three_text">{{ Num01>=10000? parseFloat(Num01/10000).toFixed(1) : Num01}}</span><span v-if="Num01>=10000" style="margin-left: 8px;">万公里</span><span v-else> 公里</span>
+          >累计导航 <span :class="Num01>=10000?'three_text':'three_two'">{{ Num01>=10000? parseFloat(Num01/10000).toFixed(1) : Num01}}</span> {{Num01>=10000 ? '万':''}}公里
           <span class="three_text">{{ Num02 }}</span> 轨迹</span
         >
         <img
@@ -337,6 +337,13 @@ function del() {
   padding: 12px 10px;
   color: #fafefd;
   font-weight: 600;
+}
+.three_two{
+  font-size: 28px !important;
+  font-family: "Bahnschrift", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #64f4ff;
+  letter-spacing: 1px;
+  font-weight: 500;
 }
 .three_text {
   font-size: 28px !important;
