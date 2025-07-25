@@ -23,8 +23,13 @@
     </div>
     <div class="top_three" @click="showNum = true">
       <div>
-        <span
-          >累计导航 <span :class="Num01>=10000?'three_two':'three_text'">{{ Num01>=10000? parseFloat(Num01/10000).toFixed(1) : Num01}}</span> {{Num01>=10000 ? '万':''}}公里
+        <span>累计导航 
+          <template v-if="isgls">
+          <span :class="Num01>=10000?'three_two':'three_text'">{{ Num01>=10000? parseFloat(Num01/10000).toFixed(1) : Num01}}</span> {{Num01>=10000 ? '万':''}}公里
+          </template>
+          <template v-else>
+          <span class="three_text">{{ Num01}}</span> 公里
+          </template>
           <span class="three_text">{{ Num02 }}</span> 轨迹</span
         >
         <img
@@ -183,6 +188,14 @@
         label="轨迹数"
         placeholder="请输入轨迹数(三位数)"
       />
+      <van-field name="radio" label="是否四舍五入">
+        <template #input>
+          <van-radio-group v-model="isgls" direction="horizontal">
+            <van-radio :name="true">是</van-radio>
+            <van-radio :name="false">否</van-radio>
+          </van-radio-group>
+        </template>
+      </van-field>
     </van-popup>
   </div>
 </template>
@@ -196,6 +209,7 @@ const showPicker = ref(false);
 const showPickertime = ref(false);
 const showrq = ref(false);
 const showNum = ref(false);
+const isgls = ref(false); //是否显示公里数
 const Num01 = ref(9793);
 const Num02 = ref(370);
 const ArrData = ref([]); //外层
