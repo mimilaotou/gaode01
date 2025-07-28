@@ -28,7 +28,7 @@
           <span :class="Num01>=10000?'three_two':'three_text'">{{ Num01>=10000? parseFloat(Num01/10000).toFixed(1) : Num01}}</span> {{Num01>=10000 ? '万':''}}公里
           </template>
           <template v-else>
-          <span class="three_text" style="letter-spacing: 1px;">{{ Num01}}</span> 公里
+          <span class="three_text" style="letter-spacing: 2px;">{{ Num01}}</span> 公里
           </template>
           <span class="three_text">{{ Num02 }}</span> 轨迹</span
         >
